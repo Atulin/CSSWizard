@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 
-using static CSSWizard.Color;
+using static CSSWizard.Colors;
 
 namespace CSSWizard
 {
@@ -32,26 +32,13 @@ namespace CSSWizard
 
         private void CalculateBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            if (SourceBox.Text.Length == 6)
-            {
-                RgbColor col = SourceBox.Text.StringToRgbColor();
+            var mCol = SourceBox.Text.HexToRgb();
 
-                ResultBox.Text += col.ToString() + Environment.NewLine;
-                ResultBox.Text += col.RgbToRgba().ToString(false) + Environment.NewLine;
-                ResultBox.Text += col.RgbToHsv().ToString() + Environment.NewLine;
-                ResultBox.Text += Environment.NewLine;
-            }
-            else if (SourceBox.Text.Length == 8)
-            {
-                RgbaColor col = SourceBox.Text.StringToRgbaColor();
-                Title = (col.Alpha * 255).ToString();
-
-                ResultBox.Text += col.ToString() + Environment.NewLine;
-                ResultBox.Text += col.ToString(false) + Environment.NewLine;
-                ResultBox.Text += col.RgbaToRgb().ToString() + Environment.NewLine;
-                ResultBox.Text += col.RgbaToHsv().ToString() + Environment.NewLine;
-                ResultBox.Text += Environment.NewLine;
-            }
+            ResultBox.Text += mCol.RgbToHex() + Environment.NewLine;
+            ResultBox.Text += mCol.RgbToHsb().HsbToString() + Environment.NewLine;
+            ResultBox.Text += mCol.RgbToHsb().InvertValue().HsbToString() + Environment.NewLine;
+            ResultBox.Text += mCol.RgbaToString() + Environment.NewLine;
+            ResultBox.Text += mCol.RgbToHsb().HsbToRgb().RgbToHex() + Environment.NewLine;
         }
     }
 }

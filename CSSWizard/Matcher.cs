@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace CSSWizard
 {
-    class Matcher
+    static class Matcher
     {
-        
+        public static void Swap(this string str)
+        {
+            string pattern = "\\B#(\\w{3}|\\w{6}|\\w{8})\\b";
+
+
+        }
+
     }
 }

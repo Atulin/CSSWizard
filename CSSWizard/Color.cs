@@ -279,7 +279,7 @@ namespace CSSWizard
 
             }
 
-            return new RgbColor((int) (red * 255), (int) (green * 255), (int) (blue * 255));
+            return new RgbColor((int) (red * 25500), (int) (green * 25500), (int) (blue * 25500));
         }
 
         // HSV to RGBA conversion
