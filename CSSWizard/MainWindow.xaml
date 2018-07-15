@@ -9,7 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="24"/>
+            <RowDefinition Height="36"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -19,7 +19,10 @@
         
         <TextBox Name="SourceBox"
                  Grid.Column="0"
-                 Margin="5" Padding="5">
+                 Margin="5" Padding="5"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 AcceptsTab="True">
             <TextBox.Effect>
                 <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="8"/>
             </TextBox.Effect>
@@ -27,15 +30,23 @@
         
         <Button Name="CalculateBtn" 
                 Click="CalculateBtn_OnClick"
-                Grid.Column="0" Grid.Row="1">
-            Calculate
+                Grid.Column="0" Grid.Row="1"
+                Margin="5" Padding="5"
+                ToolTip="Turns dark colours into light and light colours into dark">
+            <Button.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="8"/>
+            </Button.Effect>
+            Invert brightness
         </Button>
         
         <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Stretch" />
         
         <TextBox Name="ResultBox"
                  Grid.Column="2"
-                 Margin="5" Padding="5">
+                 Margin="5" Padding="5"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 AcceptsTab="True">
             <TextBox.Effect>
                 <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="8"/>
             </TextBox.Effect>

@@ -26,6 +26,17 @@ namespace CSSWizard
         {
             var rgbColor = new Color();
 
+            if (hexRgbColor.Length == 4)
+            {
+                string newStr = "#";
+                foreach (var ch in hexRgbColor.Substring(1,3))
+                {
+                    newStr += ch + ch;
+                }
+
+                hexRgbColor = newStr;
+            }
+
             var s = hexRgbColor.Substring(1, 2);
             var i = int.Parse(s, NumberStyles.HexNumber);
             rgbColor.R = Convert.ToByte(i);
@@ -50,6 +61,29 @@ namespace CSSWizard
             }
 
             return rgbColor;
+        }
+
+        public static Color VerboseRgbaToRgba(this string verboseColor)
+        {
+            string colStr = verboseColor.Replace("rgba(", "").Replace(")", "").Replace(", ", ",");
+            var colArr = colStr.Split(',');
+            var colIntArr = new int[4];
+
+            for (int i = 0; i < 3; i++)
+            {
+                colIntArr[i] = int.Parse(colArr[i]);
+            }
+
+            colIntArr[3] = (int) Math.Round(double.Parse(colArr[3], CultureInfo.InvariantCulture) * 255);
+
+            var newcol = new Color
+            {
+                R = (byte) colIntArr[0],
+                G = (byte) colIntArr[1],
+                B = (byte) colIntArr[2],
+                A = (byte) colIntArr[3]
+            };
+            return newcol;
         }
 
         public static string RgbToHex(this Color rgbColor, bool withAlpha = false)
@@ -146,7 +180,7 @@ namespace CSSWizard
             // Gray: Set RGB and return
             if (hsbColor.S == 0.0)
             {
-                rgbColor.A = Convert.ToByte(hsbColor.A * 255);
+                rgbColor.A = Convert.ToByte(hsbColor.A);
                 rgbColor.R = Convert.ToByte(hsbColor.B * 255);
                 rgbColor.G = Convert.ToByte(hsbColor.B * 255);
                 rgbColor.B = Convert.ToByte(hsbColor.B * 255);
@@ -222,6 +256,28 @@ namespace CSSWizard
                 B = 1 - col.B,
                 A = col.A
             };
+        }
+
+        public static string InvertRgbValueString(this string str)
+        {
+            var rgbIn = str.HexToRgb();
+            var hsbIn = rgbIn.RgbToHsb();
+            var hsbOut = hsbIn.InvertValue();
+            var rgbOut = hsbOut.HsbToRgb();
+            var strOut = rgbOut.RgbToHex();
+
+            return strOut;
+        }
+
+        public static string InvertRgbaValueVerbose(this string str)
+        {
+            var rgbaIn = str.VerboseRgbaToRgba();
+            var hsbIn = rgbaIn.RgbToHsb();
+            var hsbOut = hsbIn.InvertValue();
+            var rgbOut = hsbOut.HsbToRgb();
+            var strOut = rgbOut.RgbaToString();
+
+            return strOut;
         }
     }
 }

@@ -32,13 +32,7 @@ namespace CSSWizard
 
         private void CalculateBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            var mCol = SourceBox.Text.HexToRgb();
-
-            ResultBox.Text += mCol.RgbToHex() + Environment.NewLine;
-            ResultBox.Text += mCol.RgbToHsb().HsbToString() + Environment.NewLine;
-            ResultBox.Text += mCol.RgbToHsb().InvertValue().HsbToString() + Environment.NewLine;
-            ResultBox.Text += mCol.RgbaToString() + Environment.NewLine;
-            ResultBox.Text += mCol.RgbToHsb().HsbToRgb().RgbToHex() + Environment.NewLine;
+            ResultBox.Text = SourceBox.Text.Swap();
         }
     }
 }
